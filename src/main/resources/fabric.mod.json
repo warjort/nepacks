@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "${archivesBaseName}",
+  "version": "${version}",
+
+  "name": "${projectDescription}",
+  "description": "${projectDescription}",
+  "authors": [
+    "warjort"
+  ],
+  "contact": {
+    "homepage": "${homeLink}",
+    "sources": "${sourceLink}"
+  },
+
+  "license": "${license}",
+  "icon": "assets/${project.name}/icon.png",
+
+  "environment": "*",
+
+  "entrypoints": {
+    "main": ["${project.name}.${projectMain}::initMain"]
+  },
+
+  "mixins": [
+      "${project.name}.mixins.json"
+  ],
+
+  "depends": {
+    "fabric": "*",
+    "fabricloader": "${loaderConstraint}",
+    "minecraft": "${minecraftConstraint}"
+  },
+  "suggests": {
+  }
+}
