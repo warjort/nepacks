@@ -17,11 +17,15 @@
  */
 package nepacks;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.fabricmc.fabric.api.resource.ModResourcePack;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
+import net.minecraft.server.packs.PackType;
 
 public class NepacksMain {
 
@@ -35,5 +39,25 @@ public class NepacksMain {
 
     public static void initMain() {
         // nothing
+    }
+
+    @SuppressWarnings("resource")
+    public static void appendModResourcePacks(final List<ModResourcePack> packs, final PackType type) {
+        var mods = NepacksMain.sortMods();
+        for (var mod : mods) {
+            final var pack = mod.createPack(type);
+            if (!pack.getNamespaces(type).isEmpty()) {
+                packs.add(pack);
+            }
+        }
+    }
+
+    private static List<ModInformation> sortMods() {
+        final var sorter = new ModSorter();
+        final var containers = FabricLoader.getInstance().getAllMods();
+        for (var container : containers) {
+            sorter.propose(container);
+        }
+        return sorter.sort();
     }
 }

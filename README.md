@@ -43,8 +43,11 @@ The configuration file nepacks.json can be found at mod-pack-root/config/nepacks
 * sortMods - whether to sort mods according to dependency (default false)
 
 The actual algorthm used is:
-* Sort all the mods into alphabetical order by mod id
-* Go through that list and move any mods that have dependencies to just after the last mod it depends upon
+* Sort all the mods into alphabetical order by mod id as the unresolved mods
+* Keep a list of resolved mods
+* Check each mod in the unresolved list, if all its dependencies are in the resolved list, add it to the resolved list
+* When a mod is resolved restart from the beginning with the remaining unresolved mods
+* At the end, add unresolved mods in alphabetical order to the resolved list (to handle circular dependencies)
 
 This means that;
 * For the same set of mods the ordering is deterministic (even if there are circular dependencies)
