@@ -9,7 +9,6 @@
     PackRepositoryMixin
   ],
   "client": [
-    OptionsMixin,
     PackSelectionScreenMixin
   ],
   "server": [
