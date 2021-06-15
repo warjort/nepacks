@@ -30,7 +30,7 @@ import net.minecraft.server.packs.PackType;
 public class NepacksMain {
 
     public static final Logger log = LogManager.getLogger();
-    public static String MOD_ID = "nepacks";
+    public static final String MOD_ID = "nepacks";
 
     public static ModContainer getModContainer(final String modId) {
         return FabricLoader.getInstance().getModContainer(modId)
@@ -43,7 +43,7 @@ public class NepacksMain {
 
     @SuppressWarnings("resource")
     public static void appendModResourcePacks(final List<ModResourcePack> packs, final PackType type) {
-        var mods = NepacksMain.sortMods();
+        var mods = sortMods();
         for (var mod : mods) {
             final var pack = mod.createPack(type);
             if (!pack.getNamespaces(type).isEmpty()) {
